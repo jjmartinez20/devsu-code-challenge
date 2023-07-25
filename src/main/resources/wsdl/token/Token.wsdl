@@ -1,0 +1,322 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.token.security.bytesw.com/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="TokenService" targetNamespace="http://ws.token.security.bytesw.com/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.token.security.bytesw.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://ws.token.security.bytesw.com/">
+            <xs:element name="GetTokenTypesRequest" type="tns:getTokenTypesRequest"/>
+            <xs:complexType name="validateTokenRequest">
+                <xs:complexContent>
+                    <xs:extension base="tns:baseRequest">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="Transaction" nillable="true" type="tns:transaction"/>
+                            <xs:element minOccurs="0" name="Currency" nillable="true" type="tns:currency"/>
+                            <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:double"/>
+                            <xs:element minOccurs="0" name="TransactionValue" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="Ip" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="Datetime" nillable="true" type="xs:dateTime"/>
+                            <xs:element name="Token" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="baseRequest">
+                <xs:sequence>
+                    <xs:element name="Credentials" type="tns:authenticationRequest"/>
+                    <xs:element name="Channel" type="xs:string"/>
+                    <xs:element name="Country" type="xs:string"/>
+                    <xs:element name="Username" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="authenticationRequest">
+                <xs:sequence>
+                    <xs:element name="user" type="xs:string"/>
+                    <xs:element name="password" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="validateTokenResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:baseResponse">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType abstract="true" name="baseResponse">
+                <xs:sequence>
+                    <xs:element name="Code" type="xs:int"/>
+                    <xs:element minOccurs="0" name="Message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="generateTokenRequest">
+                <xs:complexContent>
+                    <xs:extension base="tns:baseRequest">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="Transaction" nillable="true" type="tns:transaction"/>
+                            <xs:element minOccurs="0" name="Currency" nillable="true" type="tns:currency"/>
+                            <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:double"/>
+                            <xs:element minOccurs="0" name="TransactionValue" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="Ip" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="Datetime" nillable="true" type="xs:dateTime"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="generateTokenResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:baseResponse">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="resendTokenRequest">
+                <xs:complexContent>
+                    <xs:extension base="tns:baseRequest">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="Transaction" nillable="true" type="tns:transaction"/>
+                            <xs:element minOccurs="0" name="Currency" nillable="true" type="tns:currency"/>
+                            <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:double"/>
+                            <xs:element minOccurs="0" name="TransactionValue" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="Ip" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="Datetime" nillable="true" type="xs:dateTime"/>
+                            <xs:element name="TokenType" type="tns:tokenType"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="resendTokenResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:baseResponse">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="assignTokenRequest">
+                <xs:complexContent>
+                    <xs:extension base="tns:baseRequest">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="DefaultPhone" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="BackupPhone" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="Operator" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="DefaultMail" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="BackupMail" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="TokenType" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="assignTokenResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:baseResponse">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="getTokenTypesRequest">
+                <xs:complexContent>
+                    <xs:extension base="tns:baseRequest">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="getTokenTypesResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:baseResponse">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="tokenTypes" nillable="true" type="tns:userTokenType"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="userTokenType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="type" type="tns:tokenType"/>
+                    <xs:element minOccurs="0" name="value" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:simpleType name="transaction">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="AUTHENTICATION"/>
+                    <xs:enumeration value="AUTHENTICATION_MOBILE"/>
+                    <xs:enumeration value="CASH_ADVANCE"/>
+                    <xs:enumeration value="CREDIT_CARD_PAYMENT"/>
+                    <xs:enumeration value="CURRENCY_EXCHANGE_BUY"/>
+                    <xs:enumeration value="CURRENCY_EXCHANGE_SELL"/>
+                    <xs:enumeration value="CURRENCY_EXCHANGE_AUCTION"/>
+                    <xs:enumeration value="DET_PAYMENT"/>
+                    <xs:enumeration value="DONATION"/>
+                    <xs:enumeration value="LOAN_PAYMENT"/>
+                    <xs:enumeration value="PAYROLL_PAYMENT"/>
+                    <xs:enumeration value="PAYROLL_PAYMENT_WALMART"/>
+                    <xs:enumeration value="PRODUCTIVE_CHAIN_LOAD"/>
+                    <xs:enumeration value="PRODUCTIVE_CHAIN_INVOICE_ASSIGN"/>
+                    <xs:enumeration value="ROP_PAYMENT"/>
+                    <xs:enumeration value="SARAH_PAYMENT"/>
+                    <xs:enumeration value="SIP_TRANSFER"/>
+                    <xs:enumeration value="SUPPLIER_PAYMENT"/>
+                    <xs:enumeration value="THIRD_PARTY_TRANSFER"/>
+                    <xs:enumeration value="THIRD_PARTY_TRANSFER_LOAD"/>
+                    <xs:enumeration value="TOP_UP_CLARO"/>
+                    <xs:enumeration value="TOP_UP_TIGO"/>
+                    <xs:enumeration value="TRANSFER"/>
+                    <xs:enumeration value="TRESAURY_PAYMENT"/>
+                    <xs:enumeration value="UTILITY_BILL_PAYMENT"/>
+                    <xs:enumeration value="UTILITY_BILL_PAYMENT_ASPS"/>
+                    <xs:enumeration value="UTILITY_BILL_PAYMENT_ENEE"/>
+                    <xs:enumeration value="UTILITY_BILL_PAYMENT_HNDT"/>
+                    <xs:enumeration value="UTILITY_BILL_PAYMENT_SANAA"/>
+                    <xs:enumeration value="WIRE_TRANSFER"/>
+                    <xs:enumeration value="WIRE_TRANSFER_INTERNATIONAL"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="currency">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="GTQ"/>
+                    <xs:enumeration value="HNL"/>
+                    <xs:enumeration value="USD"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="tokenType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="NONE"/>
+                    <xs:enumeration value="SMS"/>
+                    <xs:enumeration value="EMAIL"/>
+                    <xs:enumeration value="SOFTTOKEN"/>
+                    <xs:enumeration value="THIRD_PARTY"/>
+                    <xs:enumeration value="PUSH"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:element name="ValidateTokenRequest" nillable="true" type="tns:validateTokenRequest"/>
+            <xs:element name="ValidateTokenResult" nillable="true" type="tns:validateTokenResponse"/>
+            <xs:element name="GenerateToken" nillable="true" type="tns:generateTokenRequest"/>
+            <xs:element name="GenerateAndSendTokenResult" nillable="true" type="tns:generateTokenResponse"/>
+            <xs:element name="ResendTokenRequest" nillable="true" type="tns:resendTokenRequest"/>
+            <xs:element name="ResendTokenResult" nillable="true" type="tns:resendTokenResponse"/>
+            <xs:element name="AssignTokenRequest" nillable="true" type="tns:assignTokenRequest"/>
+            <xs:element name="AssignTokenResult" nillable="true" type="tns:assignTokenResponse"/>
+            <xs:element name="GetTokenTypes" nillable="true" type="tns:getTokenTypesRequest"/>
+            <xs:element name="GetUserTokenTypesResult" nillable="true" type="tns:getTokenTypesResponse"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="GenerateAndSendTokenResponse">
+        <wsdl:part element="tns:GenerateAndSendTokenResult" name="GenerateAndSendTokenResult">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="ValidateTokenResponse">
+        <wsdl:part element="tns:ValidateTokenResult" name="ValidateTokenResult">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="ValidateToken">
+        <wsdl:part element="tns:ValidateTokenRequest" name="ValidateTokenRequest">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="ResendTokenResponse">
+        <wsdl:part element="tns:ResendTokenResult" name="ResendTokenResult">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="GenerateAndSendToken">
+        <wsdl:part element="tns:GenerateToken" name="GenerateToken">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="ResendToken">
+        <wsdl:part element="tns:ResendTokenRequest" name="ResendTokenRequest">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="AssignTokenResponse">
+        <wsdl:part element="tns:AssignTokenResult" name="AssignTokenResult">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="GetUserTokenTypesResponse">
+        <wsdl:part element="tns:GetUserTokenTypesResult" name="GetUserTokenTypesResult">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="AssignToken">
+        <wsdl:part element="tns:AssignTokenRequest" name="AssignTokenRequest">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="GetUserTokenTypes">
+        <wsdl:part element="tns:GetTokenTypes" name="GetTokenTypes">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="TokenServiceImpl">
+        <wsdl:operation name="ValidateToken">
+            <wsdl:input message="tns:ValidateToken" name="ValidateToken">
+            </wsdl:input>
+            <wsdl:output message="tns:ValidateTokenResponse" name="ValidateTokenResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GenerateAndSendToken">
+            <wsdl:input message="tns:GenerateAndSendToken" name="GenerateAndSendToken">
+            </wsdl:input>
+            <wsdl:output message="tns:GenerateAndSendTokenResponse" name="GenerateAndSendTokenResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ResendToken">
+            <wsdl:input message="tns:ResendToken" name="ResendToken">
+            </wsdl:input>
+            <wsdl:output message="tns:ResendTokenResponse" name="ResendTokenResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="AssignToken">
+            <wsdl:input message="tns:AssignToken" name="AssignToken">
+            </wsdl:input>
+            <wsdl:output message="tns:AssignTokenResponse" name="AssignTokenResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetUserTokenTypes">
+            <wsdl:input message="tns:GetUserTokenTypes" name="GetUserTokenTypes">
+            </wsdl:input>
+            <wsdl:output message="tns:GetUserTokenTypesResponse" name="GetUserTokenTypesResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="TokenServiceSoapBinding" type="tns:TokenServiceImpl">
+        <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="ValidateToken">
+            <soap12:operation soapAction="urn:ValidateToken" style="document"/>
+            <wsdl:input name="ValidateToken">
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="ValidateTokenResponse">
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GenerateAndSendToken">
+            <soap12:operation soapAction="urn:GenerateAndSendToken" style="document"/>
+            <wsdl:input name="GenerateAndSendToken">
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="GenerateAndSendTokenResponse">
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ResendToken">
+            <soap12:operation soapAction="urn:ResendToken" style="document"/>
+            <wsdl:input name="ResendToken">
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="ResendTokenResponse">
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="AssignToken">
+            <soap12:operation soapAction="urn:AssignToken" style="document"/>
+            <wsdl:input name="AssignToken">
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="AssignTokenResponse">
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetUserTokenTypes">
+            <soap12:operation soapAction="urn:GetUserTokenTypes" style="document"/>
+            <wsdl:input name="GetUserTokenTypes">
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="GetUserTokenTypesResponse">
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="TokenService">
+        <wsdl:port binding="tns:TokenServiceSoapBinding" name="TokenServicePort">
+            <soap12:address location="http://localhost:8091/token/api/Token"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

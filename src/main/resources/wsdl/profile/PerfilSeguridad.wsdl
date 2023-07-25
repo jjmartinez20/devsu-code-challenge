@@ -1,0 +1,1428 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.profile.security.bytesw.com/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="ServicioPerfilSeguridad" targetNamespace="http://ws.profile.security.bytesw.com/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.profile.security.bytesw.com/" elementFormDefault="unqualified" targetNamespace="http://ws.profile.security.bytesw.com/" version="1.0">
+
+  <xs:element name="AuthorizationProfile" type="tns:AuthorizationProfile"/>
+
+  <xs:element name="AuthorizationProfileResponse" type="tns:AuthorizationProfileResponse"/>
+
+  <xs:element name="CheckSafetyProfile" type="tns:CheckSafetyProfile"/>
+
+  <xs:element name="CheckSafetyProfileResponse" type="tns:CheckSafetyProfileResponse"/>
+
+  <xs:element name="DeactivateUser" type="tns:DeactivateUser"/>
+
+  <xs:element name="DeactivateUserResponse" type="tns:DeactivateUserResponse"/>
+
+  <xs:element name="GetDeniedAuthorizations" type="tns:GetDeniedAuthorizations"/>
+
+  <xs:element name="GetDeniedAuthorizationsResponse" type="tns:GetDeniedAuthorizationsResponse"/>
+
+  <xs:element name="GetIBUser" type="tns:GetIBUser"/>
+
+  <xs:element name="GetIBUserResponse" type="tns:GetIBUserResponse"/>
+
+  <xs:element name="GetPendingAuthorization" type="tns:GetPendingAuthorization"/>
+
+  <xs:element name="GetPendingAuthorizationResponse" type="tns:GetPendingAuthorizationResponse"/>
+
+  <xs:element name="InitializeSafetyProfile" type="tns:InitializeSafetyProfile"/>
+
+  <xs:element name="InitializeSafetyProfileResponse" type="tns:InitializeSafetyProfileResponse"/>
+
+  <xs:element name="PeriodsChangePassword" type="tns:PeriodsChangePassword"/>
+
+  <xs:element name="PeriodsChangePasswordResponse" type="tns:PeriodsChangePasswordResponse"/>
+
+  <xs:element name="PhoneCompanies" type="tns:PhoneCompanies"/>
+
+  <xs:element name="PhoneCompaniesResponse" type="tns:PhoneCompaniesResponse"/>
+
+  <xs:element name="PostponeRegisterProfile" type="tns:PostponeRegisterProfile"/>
+
+  <xs:element name="PostponeRegisterProfileResponse" type="tns:PostponeRegisterProfileResponse"/>
+
+  <xs:element name="SafetySendEmail" type="tns:SafetySendEmail"/>
+
+  <xs:element name="SafetySendEmailResponse" type="tns:SafetySendEmailResponse"/>
+
+  <xs:element name="SecretQuestion" type="tns:SecretQuestion"/>
+
+  <xs:element name="SecretQuestionResponse" type="tns:SecretQuestionResponse"/>
+
+  <xs:element name="SendEmailPassword" type="tns:SendEmailPassword"/>
+
+  <xs:element name="SendEmailPasswordResponse" type="tns:SendEmailPasswordResponse"/>
+
+  <xs:element name="SendSmsPassword" type="tns:SendSmsPassword"/>
+
+  <xs:element name="SendSmsPasswordResponse" type="tns:SendSmsPasswordResponse"/>
+
+  <xs:element name="UpdateContactInformation" type="tns:UpdateContactInformation"/>
+
+  <xs:element name="UpdateContactInformationResponse" type="tns:UpdateContactInformationResponse"/>
+
+  <xs:element name="UpdateCustomerPeriodChangePassword" type="tns:UpdateCustomerPeriodChangePassword"/>
+
+  <xs:element name="UpdateCustomerPeriodChangePasswordResponse" type="tns:UpdateCustomerPeriodChangePasswordResponse"/>
+
+  <xs:element name="UpdateCustomerRequireSecretQuestion" type="tns:UpdateCustomerRequireSecretQuestion"/>
+
+  <xs:element name="UpdateCustomerRequireSecretQuestionResponse" type="tns:UpdateCustomerRequireSecretQuestionResponse"/>
+
+  <xs:element name="UpdatePeriodChangePassword" type="tns:UpdatePeriodChangePassword"/>
+
+  <xs:element name="UpdatePeriodChangePasswordResponse" type="tns:UpdatePeriodChangePasswordResponse"/>
+
+  <xs:element name="UpdateUserSecretQuestion" type="tns:UpdateUserSecretQuestion"/>
+
+  <xs:element name="UpdateUserSecretQuestionResponse" type="tns:UpdateUserSecretQuestionResponse"/>
+
+  <xs:element name="UserSecretQuestion" type="tns:UserSecretQuestion"/>
+
+  <xs:element name="UserSecretQuestionResponse" type="tns:UserSecretQuestionResponse"/>
+
+  <xs:element name="ValidateAffiliationCode" type="tns:ValidateAffiliationCode"/>
+
+  <xs:element name="ValidateAffiliationCodeResponse" type="tns:ValidateAffiliationCodeResponse"/>
+
+  <xs:element name="ValidateUser" type="tns:ValidateUser"/>
+
+  <xs:element name="ValidateUserResponse" type="tns:ValidateUserResponse"/>
+
+  <xs:element name="ValidateUserSecretQuestion" type="tns:ValidateUserSecretQuestion"/>
+
+  <xs:element name="ValidateUserSecretQuestionResponse" type="tns:ValidateUserSecretQuestionResponse"/>
+
+  <xs:complexType name="UpdateContactInformation">
+    <xs:sequence>
+      <xs:element name="updateContactInformationRequest" type="tns:updateContactInformationRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateContactInformationRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="ChannelWS" type="tns:channelRequest"/>
+      <xs:element name="Phone" type="xs:string"/>
+      <xs:element name="CodeOperator" type="xs:string"/>
+      <xs:element name="Email" type="xs:string"/>
+      <xs:element name="SendSMS" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="authenticationRequest">
+    <xs:sequence>
+      <xs:element name="UserWS" type="xs:string"/>
+      <xs:element name="PasswordWS" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="channelRequest">
+    <xs:sequence>
+      <xs:element name="Channel" type="xs:string"/>
+      <xs:element name="UserChannel" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="UpdateContactInformationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UpdateContactInformationResult" type="tns:updateContactInformationResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateContactInformationResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="baseResponse">
+    <xs:sequence>
+      <xs:element name="ErrorCode" type="xs:int"/>
+      <xs:element name="ErrorDescription" type="xs:string"/>
+      <xs:element name="TransactionID" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="UpdateCustomerPeriodChangePassword">
+    <xs:sequence>
+      <xs:element name="updateCustomerPeriodChangePasswordRequest" type="tns:updateCustomerPeriodChangePasswordRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateCustomerPeriodChangePasswordRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="ChannelWS" type="tns:channelRequest"/>
+      <xs:element name="Customer" type="xs:string"/>
+      <xs:element name="CodePeriod" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="UpdateCustomerPeriodChangePasswordResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UpdateCostumerPeriodChangePasswordResult" type="tns:updateCustomerPeriodChangePasswordResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateCustomerPeriodChangePasswordResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="SendSmsPassword">
+    <xs:sequence>
+      <xs:element name="sendSmsPasswordRequest" type="tns:sendSmsPasswordRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="sendSmsPasswordRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="ChannelWS" type="tns:channelRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SendSmsPasswordResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SendSmsPasswordResult" type="tns:sendSmsPasswordResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="sendSmsPasswordResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence>
+          <xs:element name="Phone" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="UpdateCustomerRequireSecretQuestion">
+    <xs:sequence>
+      <xs:element name="updateCustomerRequireSecretQuestionRequest" type="tns:updateCustomerRequireSecretQuestionRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateCustomerRequireSecretQuestionRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="ChannelWS" type="tns:channelRequest"/>
+      <xs:element name="Customer" type="xs:string"/>
+      <xs:element name="RequireSecretQuestion" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="UpdateCustomerRequireSecretQuestionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UpdateCustomerRequireSecretQuestionResult" type="tns:updateCustomerRequireSecretQuestionResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateCustomerRequireSecretQuestionResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="SecretQuestion">
+    <xs:sequence>
+      <xs:element name="secretQuestionRequest" type="tns:secretQuestionRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="secretQuestionRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SecretQuestionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SecretQuestionResult" type="tns:secretQuestionResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="secretQuestionResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="SecretQuestions" type="tns:secretQuestion"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="secretQuestion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="channel" type="xs:string"/>
+      <xs:element minOccurs="0" name="codeQuestion" type="xs:int"/>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CheckSafetyProfile">
+    <xs:sequence>
+      <xs:element name="checkSafetyProfileRequest" type="tns:safetyProfileRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="safetyProfileRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="ChannelWS" type="tns:channelRequest"/>
+      <xs:element name="Customer" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CheckSafetyProfileResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CheckSafetyProfileResult" type="tns:safetyProfileResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="safetyProfileResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Status" type="xs:string"/>
+          <xs:element minOccurs="0" name="RegistrationRequired" type="xs:string"/>
+          <xs:element minOccurs="0" name="Phone" type="xs:string"/>
+          <xs:element minOccurs="0" name="CodeOperator" type="xs:string"/>
+          <xs:element minOccurs="0" name="Email" type="xs:string"/>
+          <xs:element minOccurs="0" name="SecretQuestion1" type="xs:string"/>
+          <xs:element minOccurs="0" name="SecretQuestion2" type="xs:string"/>
+          <xs:element minOccurs="0" name="LastConnectionDate" type="xs:int"/>
+          <xs:element minOccurs="0" name="HasPendings" type="xs:string"/>
+          <xs:element minOccurs="0" name="ManagedUser" type="xs:string"/>
+          <xs:element name="periodChangePassword" type="xs:int"/>
+          <xs:element minOccurs="0" name="HasQuestions" type="xs:string"/>
+          <xs:element minOccurs="0" name="Profile" type="xs:string"/>
+          <xs:element minOccurs="0" name="UserType" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="SafetySendEmail">
+    <xs:sequence>
+      <xs:element name="safetySendEmail" type="tns:safetySendEmailRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="safetySendEmailRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="ChannelWS" type="tns:channelRequest"/>
+      <xs:element minOccurs="0" name="NameTemplate" nillable="true" type="xs:string"/>
+      <xs:element name="mailValues">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="0" name="key" type="xs:string"/>
+                  <xs:element minOccurs="0" name="value" type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="Template" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SafetySendEmailResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SafetySendEmail" type="tns:safetySendEmailResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="safetySendEmailResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="UpdatePeriodChangePassword">
+    <xs:sequence>
+      <xs:element name="updatePeriodChangePasswordRequest" type="tns:updatePeriodChangePasswordRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updatePeriodChangePasswordRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="ChannelWS" type="tns:channelRequest"/>
+      <xs:element name="CodePeriod" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="UpdatePeriodChangePasswordResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UpdatePeriodChangePasswordResult" type="tns:updatePeriodChangePasswordResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updatePeriodChangePasswordResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AuthorizationProfile">
+    <xs:sequence>
+      <xs:element name="authorizationProfileRequest" type="tns:authorizationProfileRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="authorizationProfileRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="ChannelWS" type="tns:channelRequest"/>
+      <xs:element name="Customer" type="xs:string"/>
+      <xs:element name="UserAuth" type="xs:string"/>
+      <xs:element name="Enable" type="xs:string"/>
+      <xs:element minOccurs="0" name="Motivo" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AuthorizationProfileResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthorizationProfileResult" type="tns:authorizationProfileResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="authorizationProfileResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="PeriodsChangePassword">
+    <xs:sequence>
+      <xs:element name="periodsChangePasswordRequest" type="tns:periodsChangePasswordRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="periodsChangePasswordRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element minOccurs="0" name="ChannelWS" type="tns:channelRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PeriodsChangePasswordResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PeriodsChangePasswordResult" type="tns:periodsChangePasswordResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="periodsChangePasswordResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="Periods" type="tns:periodsChangePassword"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="periodsChangePassword">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="channel" type="xs:string"/>
+      <xs:element minOccurs="0" name="codePeriod" type="xs:int"/>
+      <xs:element minOccurs="0" name="descriptionPeriod" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PhoneCompanies">
+    <xs:sequence>
+      <xs:element name="phoneCompaniesRequest" type="tns:phoneCompaniesRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="phoneCompaniesRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="Channel" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PhoneCompaniesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PhoneCompaniesResult" type="tns:phoneCompaniesResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="phoneCompaniesResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="Companies" type="tns:company"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="company">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="channel" type="xs:string"/>
+      <xs:element minOccurs="0" name="codeOperator" type="xs:string"/>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SendEmailPassword">
+    <xs:sequence>
+      <xs:element name="sendEmailPasswordRequest" type="tns:sendEmailPasswordRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="sendEmailPasswordRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="ChannelWS" type="tns:channelRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SendEmailPasswordResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SendEmailPasswordResult" type="tns:sendEmailPasswordResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="sendEmailPasswordResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence>
+          <xs:element name="Email" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="UserSecretQuestion">
+    <xs:sequence>
+      <xs:element name="userSecretQuestionRequest" type="tns:userSecretQuestionRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="userSecretQuestionRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="ChannelWS" type="tns:channelRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="UserSecretQuestionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UserSecretQuestionResult" type="tns:userSecretQuestionResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="userSecretQuestionResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence>
+          <xs:element name="SecretQuestion" type="xs:string"/>
+          <xs:element name="SecretQuestion2" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ValidateUser">
+    <xs:sequence>
+      <xs:element name="validateUserRequest" type="tns:validateUserRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="validateUserRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="ChannelWS" type="tns:channelRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ValidateUserResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ValidateUserResult" type="tns:validateUserResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="validateUserResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence>
+          <xs:element name="Status" type="xs:string"/>
+          <xs:element name="Phone" type="xs:string"/>
+          <xs:element name="Email" type="xs:string"/>
+          <xs:element name="SecretQuestions" type="xs:string"/>
+          <xs:element name="PostponeTimes" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="UpdateUserSecretQuestion">
+    <xs:sequence>
+      <xs:element name="updateUserSecretQuestionRequest" type="tns:updateUserSecretQuestionsRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateUserSecretQuestionsRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="ChannelWS" type="tns:channelRequest"/>
+      <xs:element minOccurs="0" name="EnableSecretQuestion" type="xs:string"/>
+      <xs:element minOccurs="0" name="SecretQuestion1" type="xs:string"/>
+      <xs:element minOccurs="0" name="Answer1" type="xs:string"/>
+      <xs:element minOccurs="0" name="SecretQuestion2" type="xs:string"/>
+      <xs:element minOccurs="0" name="Answer2" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="UpdateUserSecretQuestionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UpdateUserSecretQuestionResult" type="tns:updateUserSecretQuestionsResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateUserSecretQuestionsResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="InitializeSafetyProfile">
+    <xs:sequence>
+      <xs:element name="initializeSafetyProfile" type="tns:initializeSafetyProfileRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="initializeSafetyProfileRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element minOccurs="0" name="ChannelWS" type="tns:channelRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="InitializeSafetyProfileResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="InitializeSafetyProfileResult" type="tns:initializeSafetyProfileResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="initializeSafetyProfileResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ValidateUserSecretQuestion">
+    <xs:sequence>
+      <xs:element name="validateUserSecretQuestionRequest" type="tns:validateUserSecretQuestionRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="validateUserSecretQuestionRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authenticationRequest" type="tns:authenticationRequest"/>
+      <xs:element minOccurs="0" name="channelRequest" type="tns:channelRequest"/>
+      <xs:element minOccurs="0" name="answer1" type="xs:string"/>
+      <xs:element minOccurs="0" name="answer2" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ValidateUserSecretQuestionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ValidateUserSecretQuestionResult" type="tns:validateUserSecretQuestionResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="validateUserSecretQuestionResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="DeactivateUser">
+    <xs:sequence>
+      <xs:element name="deactivateUser" type="tns:deactivateUserRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="deactivateUserRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="User" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DeactivateUserResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DeactivateUserResult" type="tns:deactivateUserResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="deactivateUserResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="GetIBUser">
+    <xs:sequence>
+      <xs:element name="getIBUser" type="tns:getIBUserRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getIBUserRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="ChannelWS" type="tns:channelRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GetIBUserResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GetIBUser" type="tns:getIBUserResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getIBUserResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ibUser" type="tns:user"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="user">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="channel" type="xs:string"/>
+      <xs:element minOccurs="0" name="cif" type="xs:string"/>
+      <xs:element minOccurs="0" name="day" type="xs:string"/>
+      <xs:element minOccurs="0" name="email" type="xs:string"/>
+      <xs:element minOccurs="0" name="firstLastname" type="xs:string"/>
+      <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element minOccurs="0" name="middleName" type="xs:string"/>
+      <xs:element minOccurs="0" name="month" type="xs:string"/>
+      <xs:element minOccurs="0" name="profile" type="xs:string"/>
+      <xs:element minOccurs="0" name="secondLastname" type="xs:string"/>
+      <xs:element minOccurs="0" name="state" type="xs:string"/>
+      <xs:element minOccurs="0" name="thirdLastname" type="xs:string"/>
+      <xs:element minOccurs="0" name="user" type="xs:string"/>
+      <xs:element minOccurs="0" name="userType" type="xs:string"/>
+      <xs:element minOccurs="0" name="year" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PostponeRegisterProfile">
+    <xs:sequence>
+      <xs:element name="postponeRegisterProfileRequest" type="tns:postponeRegisterProfileRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="postponeRegisterProfileRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element minOccurs="0" name="ChannelWS" type="tns:channelRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PostponeRegisterProfileResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PostponeRegisterProfileResult" type="tns:postponeRegisterProfileResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="postponeRegisterProfileResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="GetDeniedAuthorizations">
+    <xs:sequence>
+      <xs:element name="getDeniedAuthorizations" type="tns:getDeniedAuthorizationsRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getDeniedAuthorizationsRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="ChannelWS" type="tns:channelRequest"/>
+      <xs:element name="Customer" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GetDeniedAuthorizationsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GetDeniedAuthorizationsResult" type="tns:getDeniedAuthorizationsResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getDeniedAuthorizationsResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DeniedAuthorization" type="tns:pendingAuthorization"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="pendingAuthorization">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="acceptanceStatus" type="xs:string"/>
+      <xs:element minOccurs="0" name="answer1" type="xs:string"/>
+      <xs:element minOccurs="0" name="answer2" type="xs:string"/>
+      <xs:element minOccurs="0" name="authorizationOrigin" type="xs:string"/>
+      <xs:element minOccurs="0" name="authorized" type="xs:string"/>
+      <xs:element minOccurs="0" name="channel" type="xs:string"/>
+      <xs:element minOccurs="0" name="customer" type="xs:string"/>
+      <xs:element minOccurs="0" name="email" type="xs:string"/>
+      <xs:element minOccurs="0" name="enableQuestions" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:int"/>
+      <xs:element minOccurs="0" name="motivoRechazo" type="xs:string"/>
+      <xs:element minOccurs="0" name="notified" type="xs:string"/>
+      <xs:element minOccurs="0" name="phoneCompany" type="xs:string"/>
+      <xs:element minOccurs="0" name="phoneNumber" type="xs:string"/>
+      <xs:element minOccurs="0" name="question1" type="xs:string"/>
+      <xs:element minOccurs="0" name="question2" type="xs:string"/>
+      <xs:element minOccurs="0" name="user" type="xs:string"/>
+      <xs:element minOccurs="0" name="userManager" type="xs:string"/>
+      <xs:element minOccurs="0" name="userName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GetPendingAuthorization">
+    <xs:sequence>
+      <xs:element name="getPendingAuthorizationRequest" type="tns:getPendingAuthorizationRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getPendingAuthorizationRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="ChannelWS" type="tns:channelRequest"/>
+      <xs:element name="Customer" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GetPendingAuthorizationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GetPendingAuthorizationResult" type="tns:getPendingAuthorizationResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getPendingAuthorizationResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="PendingAuthorizations" type="tns:pendingAuthorization"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ValidateAffiliationCode">
+    <xs:sequence>
+      <xs:element name="validateAffiliationCodeRequest" type="tns:validateAffiliationCodeRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="validateAffiliationCodeRequest">
+    <xs:sequence>
+      <xs:element name="CredencialesWS" type="tns:authenticationRequest"/>
+      <xs:element name="ChannelWS" type="tns:channelRequest"/>
+      <xs:element name="AffiliationCode" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ValidateAffiliationCodeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ValidateAffiliationCodeResult" type="tns:validateAffiliationCodeResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="validateAffiliationCodeResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:baseResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="UpdateCustomerPeriodChangePassword">
+    <wsdl:part element="tns:UpdateCustomerPeriodChangePassword" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PeriodsChangePasswordResponse">
+    <wsdl:part element="tns:PeriodsChangePasswordResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SendEmailPasswordResponse">
+    <wsdl:part element="tns:SendEmailPasswordResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeactivateUserResponse">
+    <wsdl:part element="tns:DeactivateUserResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SendSmsPasswordResponse">
+    <wsdl:part element="tns:SendSmsPasswordResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CheckSafetyProfile">
+    <wsdl:part element="tns:CheckSafetyProfile" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UserSecretQuestionResponse">
+    <wsdl:part element="tns:UserSecretQuestionResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ValidateUserSecretQuestionResponse">
+    <wsdl:part element="tns:ValidateUserSecretQuestionResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SafetySendEmail">
+    <wsdl:part element="tns:SafetySendEmail" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdatePeriodChangePassword">
+    <wsdl:part element="tns:UpdatePeriodChangePassword" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SendEmailPassword">
+    <wsdl:part element="tns:SendEmailPassword" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AuthorizationProfileResponse">
+    <wsdl:part element="tns:AuthorizationProfileResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetIBUserResponse">
+    <wsdl:part element="tns:GetIBUserResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ValidateUser">
+    <wsdl:part element="tns:ValidateUser" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetDeniedAuthorizationsResponse">
+    <wsdl:part element="tns:GetDeniedAuthorizationsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateUserSecretQuestion">
+    <wsdl:part element="tns:UpdateUserSecretQuestion" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetPendingAuthorizationResponse">
+    <wsdl:part element="tns:GetPendingAuthorizationResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PhoneCompaniesResponse">
+    <wsdl:part element="tns:PhoneCompaniesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateCustomerRequireSecretQuestionResponse">
+    <wsdl:part element="tns:UpdateCustomerRequireSecretQuestionResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitializeSafetyProfile">
+    <wsdl:part element="tns:InitializeSafetyProfile" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeactivateUser">
+    <wsdl:part element="tns:DeactivateUser" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ValidateAffiliationCodeResponse">
+    <wsdl:part element="tns:ValidateAffiliationCodeResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InitializeSafetyProfileResponse">
+    <wsdl:part element="tns:InitializeSafetyProfileResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetDeniedAuthorizations">
+    <wsdl:part element="tns:GetDeniedAuthorizations" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateContactInformationResponse">
+    <wsdl:part element="tns:UpdateContactInformationResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CheckSafetyProfileResponse">
+    <wsdl:part element="tns:CheckSafetyProfileResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateContactInformation">
+    <wsdl:part element="tns:UpdateContactInformation" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PostponeRegisterProfileResponse">
+    <wsdl:part element="tns:PostponeRegisterProfileResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SendSmsPassword">
+    <wsdl:part element="tns:SendSmsPassword" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SecretQuestionResponse">
+    <wsdl:part element="tns:SecretQuestionResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateCustomerRequireSecretQuestion">
+    <wsdl:part element="tns:UpdateCustomerRequireSecretQuestion" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SecretQuestion">
+    <wsdl:part element="tns:SecretQuestion" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SafetySendEmailResponse">
+    <wsdl:part element="tns:SafetySendEmailResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AuthorizationProfile">
+    <wsdl:part element="tns:AuthorizationProfile" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PeriodsChangePassword">
+    <wsdl:part element="tns:PeriodsChangePassword" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PhoneCompanies">
+    <wsdl:part element="tns:PhoneCompanies" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateCustomerPeriodChangePasswordResponse">
+    <wsdl:part element="tns:UpdateCustomerPeriodChangePasswordResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UserSecretQuestion">
+    <wsdl:part element="tns:UserSecretQuestion" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateUserSecretQuestionResponse">
+    <wsdl:part element="tns:UpdateUserSecretQuestionResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ValidateUserSecretQuestion">
+    <wsdl:part element="tns:ValidateUserSecretQuestion" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetIBUser">
+    <wsdl:part element="tns:GetIBUser" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PostponeRegisterProfile">
+    <wsdl:part element="tns:PostponeRegisterProfile" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetPendingAuthorization">
+    <wsdl:part element="tns:GetPendingAuthorization" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdatePeriodChangePasswordResponse">
+    <wsdl:part element="tns:UpdatePeriodChangePasswordResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ValidateUserResponse">
+    <wsdl:part element="tns:ValidateUserResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ValidateAffiliationCode">
+    <wsdl:part element="tns:ValidateAffiliationCode" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="PerfilSeguridad">
+    <wsdl:operation name="UpdateContactInformation">
+      <wsdl:input message="tns:UpdateContactInformation" name="UpdateContactInformation">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateContactInformationResponse" name="UpdateContactInformationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomerPeriodChangePassword">
+      <wsdl:input message="tns:UpdateCustomerPeriodChangePassword" name="UpdateCustomerPeriodChangePassword">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateCustomerPeriodChangePasswordResponse" name="UpdateCustomerPeriodChangePasswordResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSmsPassword">
+      <wsdl:input message="tns:SendSmsPassword" name="SendSmsPassword">
+    </wsdl:input>
+      <wsdl:output message="tns:SendSmsPasswordResponse" name="SendSmsPasswordResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomerRequireSecretQuestion">
+      <wsdl:input message="tns:UpdateCustomerRequireSecretQuestion" name="UpdateCustomerRequireSecretQuestion">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateCustomerRequireSecretQuestionResponse" name="UpdateCustomerRequireSecretQuestionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SecretQuestion">
+      <wsdl:input message="tns:SecretQuestion" name="SecretQuestion">
+    </wsdl:input>
+      <wsdl:output message="tns:SecretQuestionResponse" name="SecretQuestionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSafetyProfile">
+      <wsdl:input message="tns:CheckSafetyProfile" name="CheckSafetyProfile">
+    </wsdl:input>
+      <wsdl:output message="tns:CheckSafetyProfileResponse" name="CheckSafetyProfileResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SafetySendEmail">
+      <wsdl:input message="tns:SafetySendEmail" name="SafetySendEmail">
+    </wsdl:input>
+      <wsdl:output message="tns:SafetySendEmailResponse" name="SafetySendEmailResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePeriodChangePassword">
+      <wsdl:input message="tns:UpdatePeriodChangePassword" name="UpdatePeriodChangePassword">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdatePeriodChangePasswordResponse" name="UpdatePeriodChangePasswordResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthorizationProfile">
+      <wsdl:input message="tns:AuthorizationProfile" name="AuthorizationProfile">
+    </wsdl:input>
+      <wsdl:output message="tns:AuthorizationProfileResponse" name="AuthorizationProfileResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PeriodsChangePassword">
+      <wsdl:input message="tns:PeriodsChangePassword" name="PeriodsChangePassword">
+    </wsdl:input>
+      <wsdl:output message="tns:PeriodsChangePasswordResponse" name="PeriodsChangePasswordResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PhoneCompanies">
+      <wsdl:input message="tns:PhoneCompanies" name="PhoneCompanies">
+    </wsdl:input>
+      <wsdl:output message="tns:PhoneCompaniesResponse" name="PhoneCompaniesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailPassword">
+      <wsdl:input message="tns:SendEmailPassword" name="SendEmailPassword">
+    </wsdl:input>
+      <wsdl:output message="tns:SendEmailPasswordResponse" name="SendEmailPasswordResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserSecretQuestion">
+      <wsdl:input message="tns:UserSecretQuestion" name="UserSecretQuestion">
+    </wsdl:input>
+      <wsdl:output message="tns:UserSecretQuestionResponse" name="UserSecretQuestionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUser">
+      <wsdl:input message="tns:ValidateUser" name="ValidateUser">
+    </wsdl:input>
+      <wsdl:output message="tns:ValidateUserResponse" name="ValidateUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserSecretQuestion">
+      <wsdl:input message="tns:UpdateUserSecretQuestion" name="UpdateUserSecretQuestion">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateUserSecretQuestionResponse" name="UpdateUserSecretQuestionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitializeSafetyProfile">
+      <wsdl:input message="tns:InitializeSafetyProfile" name="InitializeSafetyProfile">
+    </wsdl:input>
+      <wsdl:output message="tns:InitializeSafetyProfileResponse" name="InitializeSafetyProfileResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUserSecretQuestion">
+      <wsdl:input message="tns:ValidateUserSecretQuestion" name="ValidateUserSecretQuestion">
+    </wsdl:input>
+      <wsdl:output message="tns:ValidateUserSecretQuestionResponse" name="ValidateUserSecretQuestionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeactivateUser">
+      <wsdl:input message="tns:DeactivateUser" name="DeactivateUser">
+    </wsdl:input>
+      <wsdl:output message="tns:DeactivateUserResponse" name="DeactivateUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIBUser">
+      <wsdl:input message="tns:GetIBUser" name="GetIBUser">
+    </wsdl:input>
+      <wsdl:output message="tns:GetIBUserResponse" name="GetIBUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostponeRegisterProfile">
+      <wsdl:input message="tns:PostponeRegisterProfile" name="PostponeRegisterProfile">
+    </wsdl:input>
+      <wsdl:output message="tns:PostponeRegisterProfileResponse" name="PostponeRegisterProfileResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeniedAuthorizations">
+      <wsdl:input message="tns:GetDeniedAuthorizations" name="GetDeniedAuthorizations">
+    </wsdl:input>
+      <wsdl:output message="tns:GetDeniedAuthorizationsResponse" name="GetDeniedAuthorizationsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingAuthorization">
+      <wsdl:input message="tns:GetPendingAuthorization" name="GetPendingAuthorization">
+    </wsdl:input>
+      <wsdl:output message="tns:GetPendingAuthorizationResponse" name="GetPendingAuthorizationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateAffiliationCode">
+      <wsdl:input message="tns:ValidateAffiliationCode" name="ValidateAffiliationCode">
+    </wsdl:input>
+      <wsdl:output message="tns:ValidateAffiliationCodeResponse" name="ValidateAffiliationCodeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServicioPerfilSeguridadSoapBinding" type="tns:PerfilSeguridad">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="UpdateContactInformation">
+      <soap12:operation soapAction="urn:UpdateContactInformation" style="document"/>
+      <wsdl:input name="UpdateContactInformation">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdateContactInformationResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomerPeriodChangePassword">
+      <soap12:operation soapAction="urn:UpdateCustomerPeriodChangePassword" style="document"/>
+      <wsdl:input name="UpdateCustomerPeriodChangePassword">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdateCustomerPeriodChangePasswordResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSmsPassword">
+      <soap12:operation soapAction="urn:SendSmsPassword" style="document"/>
+      <wsdl:input name="SendSmsPassword">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SendSmsPasswordResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCustomerRequireSecretQuestion">
+      <soap12:operation soapAction="urn:UpdateCustomerRequireSecretQuestion" style="document"/>
+      <wsdl:input name="UpdateCustomerRequireSecretQuestion">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdateCustomerRequireSecretQuestionResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SecretQuestion">
+      <soap12:operation soapAction="urn:SecretQuestion" style="document"/>
+      <wsdl:input name="SecretQuestion">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SecretQuestionResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSafetyProfile">
+      <soap12:operation soapAction="urn:CheckSafetyProfile" style="document"/>
+      <wsdl:input name="CheckSafetyProfile">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CheckSafetyProfileResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SafetySendEmail">
+      <soap12:operation soapAction="urn:SafetySendEmail" style="document"/>
+      <wsdl:input name="SafetySendEmail">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SafetySendEmailResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePeriodChangePassword">
+      <soap12:operation soapAction="urn:UpdatePeriodChangePassword" style="document"/>
+      <wsdl:input name="UpdatePeriodChangePassword">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdatePeriodChangePasswordResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthorizationProfile">
+      <soap12:operation soapAction="urn:AuthorizationProfile" style="document"/>
+      <wsdl:input name="AuthorizationProfile">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AuthorizationProfileResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PeriodsChangePassword">
+      <soap12:operation soapAction="urn:PeriodsChangePassword" style="document"/>
+      <wsdl:input name="PeriodsChangePassword">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="PeriodsChangePasswordResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PhoneCompanies">
+      <soap12:operation soapAction="urn:PhoneCompanies" style="document"/>
+      <wsdl:input name="PhoneCompanies">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="PhoneCompaniesResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailPassword">
+      <soap12:operation soapAction="urn:SendEmailPassword" style="document"/>
+      <wsdl:input name="SendEmailPassword">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SendEmailPasswordResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserSecretQuestion">
+      <soap12:operation soapAction="urn:UserSecretQuestion" style="document"/>
+      <wsdl:input name="UserSecretQuestion">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UserSecretQuestionResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUser">
+      <soap12:operation soapAction="urn:ValidateUser" style="document"/>
+      <wsdl:input name="ValidateUser">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ValidateUserResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserSecretQuestion">
+      <soap12:operation soapAction="urn:UpdateUserSecretQuestion" style="document"/>
+      <wsdl:input name="UpdateUserSecretQuestion">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdateUserSecretQuestionResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitializeSafetyProfile">
+      <soap12:operation soapAction="urn:InitializeSafetyProfile" style="document"/>
+      <wsdl:input name="InitializeSafetyProfile">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="InitializeSafetyProfileResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateUserSecretQuestion">
+      <soap12:operation soapAction="urn:ValidateUserSecretQuestion" style="document"/>
+      <wsdl:input name="ValidateUserSecretQuestion">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ValidateUserSecretQuestionResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeactivateUser">
+      <soap12:operation soapAction="urn:DeactivateUser" style="document"/>
+      <wsdl:input name="DeactivateUser">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="DeactivateUserResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIBUser">
+      <soap12:operation soapAction="urn:GetIBUser" style="document"/>
+      <wsdl:input name="GetIBUser">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetIBUserResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostponeRegisterProfile">
+      <soap12:operation soapAction="urn:PostponeRegisterProfile" style="document"/>
+      <wsdl:input name="PostponeRegisterProfile">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="PostponeRegisterProfileResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeniedAuthorizations">
+      <soap12:operation soapAction="urn:GetDeniedAuthorizations" style="document"/>
+      <wsdl:input name="GetDeniedAuthorizations">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetDeniedAuthorizationsResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingAuthorization">
+      <soap12:operation soapAction="urn:GetPendingAuthorization" style="document"/>
+      <wsdl:input name="GetPendingAuthorization">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetPendingAuthorizationResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateAffiliationCode">
+      <soap12:operation soapAction="urn:ValidateAffiliationCode" style="document"/>
+      <wsdl:input name="ValidateAffiliationCode">
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ValidateAffiliationCodeResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServicioPerfilSeguridad">
+    <wsdl:port binding="tns:ServicioPerfilSeguridadSoapBinding" name="ServicioPerfilSeguridadPort">
+      <soap12:address location="http://10.100.203.14:8080/profile/api/PerfilSeguridad"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
