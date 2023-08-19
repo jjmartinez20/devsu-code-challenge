@@ -6,13 +6,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Clase que manejará de manera global las excepciones que puedan ser lanzadas
@@ -23,12 +22,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  *
  */
 @ControllerAdvice
+@Slf4j
 public class ManejadorExcepciones {
-
-	/**
-	 * Instancia del logger que registrará las excepciones que maneja la clase
-	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(ManejadorExcepciones.class);
 
 	/**
 	 * Maneja los errores que puedan ocurrir al validar el valor de los atributos de
@@ -39,7 +34,7 @@ public class ManejadorExcepciones {
 	 */
 	@ExceptionHandler(value = { ConstraintViolationException.class })
 	public ResponseEntity<Object> manejarExcepcionValidacionDeCampos(ConstraintViolationException e) {
-		LOGGER.error("Campo(s) no válido(s): ", e);
+		log.error("Campo(s) no válido(s): ", e);
 		String mensaje = e.getConstraintViolations().stream().map(ConstraintViolation::getMessage)
 				.collect(Collectors.joining(", "));
 		Map<String, Object> respuesta = generarEstructuraRespuesta(mensaje, HttpStatus.BAD_REQUEST);
@@ -58,7 +53,7 @@ public class ManejadorExcepciones {
 			CuentaNoEncontradaExcepcion.class })
 	public ResponseEntity<Object> manejarExcepcionRecursoNoEncontrado(Exception e) {
 		String mensaje = e.getMessage();
-		LOGGER.error(mensaje, e);
+		log.error(mensaje, e);
 		Map<String, Object> respuesta = generarEstructuraRespuesta(mensaje, HttpStatus.NOT_FOUND);
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(respuesta);
 	}
@@ -76,7 +71,7 @@ public class ManejadorExcepciones {
 			MissingServletRequestParameterException.class })
 	public ResponseEntity<Object> manejarExcepcionDatoConflictivo(Exception e) {
 		String mensaje = e.getMessage();
-		LOGGER.error(mensaje, e);
+		log.error(mensaje, e);
 		Map<String, Object> respuesta = generarEstructuraRespuesta(mensaje, HttpStatus.CONFLICT);
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(respuesta);
 	}
@@ -84,13 +79,14 @@ public class ManejadorExcepciones {
 	/**
 	 * Maneja los errores genéricos que aún no han sido mapeados.
 	 * 
-	 * @param e Excepción lanzada al intentar realizar cualquier operación y genere un error
+	 * @param e Excepción lanzada al intentar realizar cualquier operación y genere
+	 *          un error
 	 * @return Respuesta que se le envía al cliente
 	 */
 	@ExceptionHandler(value = { Exception.class })
 	public ResponseEntity<Object> manejarExcepcionGenerica(Exception e) {
 		String mensaje = "Error desconocido";
-		LOGGER.error(mensaje, e);
+		log.error(mensaje, e);
 		Map<String, Object> respuesta = generarEstructuraRespuesta(mensaje, HttpStatus.INTERNAL_SERVER_ERROR);
 		return ResponseEntity.internalServerError().body(respuesta);
 	}

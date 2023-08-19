@@ -1,12 +1,8 @@
-package com.devsu.test.servicio;
+package com.devsu.test.interfaces;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
-import javax.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.devsu.test.dto.MovimientoDTO;
 import com.devsu.test.dto.MovimientoRespuestaDTO;
 import com.devsu.test.excepcion.ClienteNoEncontradoExcepcion;
@@ -14,35 +10,9 @@ import com.devsu.test.excepcion.CuentaNoActivaExcepcion;
 import com.devsu.test.excepcion.CuentaNoEncontradaExcepcion;
 import com.devsu.test.excepcion.LimiteDiarioExcepcion;
 import com.devsu.test.excepcion.SaldoNoDisponibleExcepcion;
-import com.devsu.test.modelo.Cuenta;
 import com.devsu.test.modelo.Movimiento;
-import com.devsu.test.repositorio.MovimientoRepositorio;
-import com.devsu.test.utilidad.Validador;
 
-/**
- * Servicio que se encarga de realizar las operaciones referentes a los
- * movimientos.
- * 
- * @author Jefry Martínez
- * @version 1.0.0
- *
- */
-@Service
-public class MovimientoServicio {
-
-	@Autowired
-	private MovimientoRepositorio movimientoRepositorio;
-
-	@Autowired
-	private CuentaServicio cuentaServicio;
-
-	@Autowired
-	private ClienteServicio clienteServicio;
-
-	/**
-	 * Valor del límite de retiros diarios que puede realizar una cuenta.
-	 */
-	private static final double LIMITE_DIARIO = 1000.0;
+public interface MovimientoServicio {
 
 	/**
 	 * Busca todos los registros de los movimientos en la base de datos.
@@ -50,9 +20,7 @@ public class MovimientoServicio {
 	 * @return Todos los registros encontrados.
 	 * 
 	 */
-	public List<Movimiento> obtenerMovimientos() {
-		return movimientoRepositorio.findAll();
-	}
+	public List<Movimiento> obtenerMovimientos();
 
 	/**
 	 * Busca todos los registros de los movimientos de un cliente en la base de
@@ -65,10 +33,7 @@ public class MovimientoServicio {
 	 *                                      id proporcionado
 	 * 
 	 */
-	public List<Movimiento> obtenerMovimientosCliente(long clienteId) {
-		clienteServicio.verificarExistenciaCliente(clienteId);
-		return movimientoRepositorio.findByCuentaClienteIdOrderByFechaDesc(clienteId);
-	}
+	public List<Movimiento> obtenerMovimientosCliente(long clienteId);
 
 	/**
 	 * Busca los movimientos en las cuentas que tiene un cliente a partir de una
@@ -83,10 +48,7 @@ public class MovimientoServicio {
 	 *                                      id proporcionado
 	 * 
 	 */
-	public List<Movimiento> estadoCuentaClienteDesdeFecha(long clienteId, LocalDate fecha) {
-		clienteServicio.verificarExistenciaCliente(clienteId);
-		return movimientoRepositorio.estadoCuentaClienteDesdeFecha(clienteId, fecha);
-	}
+	public List<Movimiento> estadoCuentaClienteDesdeFecha(long clienteId, LocalDate fecha);
 
 	/**
 	 * Busca los movimientos en las cuentas que tiene un cliente hasta una fecha
@@ -101,10 +63,7 @@ public class MovimientoServicio {
 	 *                                      id proporcionado
 	 * 
 	 */
-	public List<Movimiento> estadoCuentaClienteHastaFecha(long clienteId, LocalDate fecha) {
-		clienteServicio.verificarExistenciaCliente(clienteId);
-		return movimientoRepositorio.estadoCuentaClienteHastaFecha(clienteId, fecha);
-	}
+	public List<Movimiento> estadoCuentaClienteHastaFecha(long clienteId, LocalDate fecha);
 
 	/**
 	 * Busca los movimientos en las cuentas que tiene un cliente entre dos fechas
@@ -121,10 +80,7 @@ public class MovimientoServicio {
 	 *                                      id proporcionado
 	 * 
 	 */
-	public List<Movimiento> estadoCuentaClienteEntreFechas(long clienteId, LocalDate fechaDesde, LocalDate fechaHasta) {
-		clienteServicio.verificarExistenciaCliente(clienteId);
-		return movimientoRepositorio.estadoCuentaClienteEntreFechas(clienteId, fechaDesde, fechaHasta);
-	}
+	public List<Movimiento> estadoCuentaClienteEntreFechas(long clienteId, LocalDate fechaDesde, LocalDate fechaHasta);
 
 	/**
 	 * Busca todos los registros de los movimientos de una cuenta en la base de
@@ -136,10 +92,7 @@ public class MovimientoServicio {
 	 *                                      id proporcionado
 	 * 
 	 */
-	public List<Movimiento> obtenerMovimientosCuenta(String numeroCuenta) {
-		cuentaServicio.validarExistenciaNumeroCuenta(numeroCuenta);
-		return movimientoRepositorio.findByCuentaNumeroCuentaOrderByFechaDesc(numeroCuenta);
-	}
+	public List<Movimiento> obtenerMovimientosCuenta(String numeroCuenta);
 
 	/**
 	 * Busca un movimiento a partir de un id.
@@ -149,9 +102,7 @@ public class MovimientoServicio {
 	 *         registro buscado o null en caso contrario.
 	 * 
 	 */
-	public Movimiento buscarMovimiento(long id) {
-		return movimientoRepositorio.findById(id).orElse(null);
-	}
+	public Movimiento buscarMovimiento(long id);
 
 	/**
 	 * Agrega un nuevo movimiento en la base de datos y actualiza el saldo en la
@@ -176,34 +127,7 @@ public class MovimientoServicio {
 	 *                                      realizar
 	 * 
 	 */
-	@Transactional(rollbackOn = Exception.class)
-	public Movimiento nuevoMovimiento(Movimiento movimiento) {
-		Validador.validarEntidad(movimiento);
-		Cuenta cuenta = cuentaServicio.validarExistenciaNumeroCuenta(movimiento.getCuenta().getNumeroCuenta());
-		if (!cuenta.isEstado())
-			throw new CuentaNoActivaExcepcion("La cuenta está inactiva");
-		if (movimiento.getValor() == 0)
-			throw new IllegalArgumentException("El valor del movimiento debe ser distinto de cero");
-		double nuevoSaldo = cuenta.getSaldoInicial() + movimiento.getValor();
-		if (movimiento.getValor() < 0) {
-			if (nuevoSaldo < 0)
-				throw new SaldoNoDisponibleExcepcion("Saldo no disponible");
-			double retiroDiario = Math.abs(
-					movimientoRepositorio.obtenerRetiroDiarioCuenta(cuenta.getNumeroCuenta(), movimiento.getFecha()));
-			if (retiroDiario >= LIMITE_DIARIO)
-				throw new LimiteDiarioExcepcion(
-						String.format("Ya ha alcanzado el límite diario permitido ($%.2f)", LIMITE_DIARIO));
-			double diferenciaLimite = retiroDiario + Math.abs(movimiento.getValor()) - LIMITE_DIARIO;
-			if (diferenciaLimite > 0)
-				throw new LimiteDiarioExcepcion(String.format(
-						"No se puede realizar el retiro porque superaría por %.2f el límite diario permitido ($%.2f)",
-						diferenciaLimite, LIMITE_DIARIO));
-		}
-		Movimiento mov = movimientoRepositorio.save(movimiento);
-		cuenta.setSaldoInicial(nuevoSaldo);
-		cuentaServicio.actualizarCuenta(cuenta.getId(), cuenta);
-		return mov;
-	}
+	public Movimiento nuevoMovimiento(Movimiento movimiento);
 
 	/**
 	 * Actualiza un movimiento en la base de datos.
@@ -219,25 +143,7 @@ public class MovimientoServicio {
 	 *                                      número proporcionado
 	 * 
 	 */
-	public Movimiento actualizarMovimiento(long id, Movimiento movimiento) {
-		Validador.validarEntidad(movimiento);
-		Movimiento registroMovimiento = buscarMovimiento(id);
-		if (registroMovimiento != null) {
-			String numeroCuenta = movimiento.getCuenta().getNumeroCuenta();
-			Cuenta cuenta = cuentaServicio.buscarPorNumeroCuenta(numeroCuenta);
-			if (cuenta == null)
-				throw new CuentaNoEncontradaExcepcion(
-						String.format("No se ha encontrado la cuenta con número %s", numeroCuenta));
-			registroMovimiento.setCuenta(cuenta);
-			double diferenciaValor = registroMovimiento.getValor() - movimiento.getValor();
-			registroMovimiento.setFecha(movimiento.getFecha());
-			registroMovimiento.setValor(movimiento.getValor());
-			registroMovimiento.setSaldo(registroMovimiento.getSaldo() - diferenciaValor);
-			return movimientoRepositorio.save(registroMovimiento);
-		} else {
-			return null;
-		}
-	}
+	public Movimiento actualizarMovimiento(long id, Movimiento movimiento);
 
 	/**
 	 * Actualiza los atributos proporcionados de un movimiento en la base de datos.
@@ -252,40 +158,28 @@ public class MovimientoServicio {
 	 *                                      violación en las restricciones
 	 * @throws CuentaNoEncontradaExcepcion  Si no se encuentra ninguna cuenta con el
 	 *                                      número proporcionado
+	 * @throws IllegalArgumentExcepcion     Si alguno de los valores de los
+	 *                                      atributos de la entidad tiene alguna
+	 *                                      violación en las restricciones
 	 * 
 	 */
-	public Movimiento actualizarMovimiento(long id, Map<String, Object> cambios) {
-		final Movimiento movimiento = buscarMovimiento(id);
-		if (movimiento != null) {
-			cambios.forEach((campo, valor) -> {
-				switch (campo) {
-				case "cuenta":
-					String numeroCuenta = valor.toString().trim();
-					Cuenta cuenta = cuentaServicio.buscarPorNumeroCuenta(numeroCuenta);
-					if (cuenta == null)
-						throw new CuentaNoEncontradaExcepcion(
-								String.format("No se ha encontrado la cuenta con número %s", numeroCuenta));
-					movimiento.setCuenta(cuenta);
-					break;
-				case "fecha":
-					movimiento.setFecha(
-							LocalDate.parse(valor.toString().trim(), DateTimeFormatter.ofPattern("d/M/yyyy")));
-					break;
-				case "valor":
-					double diferenciaValor = Double.valueOf(valor.toString()) - movimiento.getValor();
-					movimiento.setValor(Double.valueOf(valor.toString()));
-					movimiento.setSaldo(movimiento.getSaldo() - diferenciaValor);
-					break;
-				default:
-					break;
-				}
-			});
-			Validador.validarEntidad(movimiento);
-			return movimientoRepositorio.save(movimiento);
-		} else {
-			return null;
-		}
-	}
+	public Movimiento actualizarMovimiento(long id, Map<String, Object> cambios);
+
+	/**
+	 * Valida que el campo mapeado exista en la entidad y que su valor sea correcto
+	 * antes de asignarlo a la instancia que será registrada en la base de datos.
+	 * 
+	 * @param campo      Nombre del campo de la entidad a evaluar
+	 * @param valor      Valor del campo a evaluar
+	 * @param movimiento Instancia de la entidad a la que se le asignará el valor
+	 *                   validado
+	 * @throws CuentaNoEncontradaExcepcion  Si no se encuentra ninguna cuenta con el
+	 *                                      número proporcionado
+	 * @throws IllegalArgumentExcepcion     Si alguno de los valores de los
+	 *                                      atributos de la entidad tiene alguna
+	 *                                      violación en las restricciones
+	 */
+	public void validarCampoMovimiento(String campo, String valor, Movimiento movimiento);
 
 	/**
 	 * Busca un movimiento e intenta eliminarlo si lo encuentra.
@@ -295,15 +189,7 @@ public class MovimientoServicio {
 	 *         contrario.
 	 * 
 	 */
-	public boolean eliminarMovimiento(long id) {
-		Movimiento movimiento = buscarMovimiento(id);
-		if (movimiento != null) {
-			movimientoRepositorio.delete(movimiento);
-			return true;
-		} else {
-			return false;
-		}
-	}
+	public boolean eliminarMovimiento(long id);
 
 	/**
 	 * Pasa los datos de un modelo DTO a un modelo de persistencia.
@@ -313,15 +199,7 @@ public class MovimientoServicio {
 	 *         DTO.
 	 * 
 	 */
-	public Movimiento convertirDtoEntidad(MovimientoDTO dto) {
-		Cuenta cuenta = cuentaServicio.validarExistenciaNumeroCuenta(dto.getCuenta());
-		Movimiento movimiento = new Movimiento();
-		movimiento.setCuenta(cuenta);
-		movimiento.setFecha(dto.getFecha());
-		movimiento.setSaldo(cuenta.getSaldoInicial() + dto.getValor());
-		movimiento.setValor(dto.getValor());
-		return movimiento;
-	}
+	public Movimiento convertirDtoEntidad(MovimientoDTO dto);
 
 	/**
 	 * Pasa los datos de un modelo de persistencia a un modelo DTO de respuesta.
@@ -330,17 +208,8 @@ public class MovimientoServicio {
 	 * @return Modelo DTO de respuesta a partir del modelo persistente.
 	 * 
 	 */
-	public MovimientoRespuestaDTO convertirEntidadDto(Movimiento entidad) {
-		MovimientoRespuestaDTO dto = new MovimientoRespuestaDTO();
-		dto.setFecha(entidad.getFecha());
-		dto.setCliente(entidad.getCuenta().getCliente().getNombre());
-		dto.setNumeroCuenta(entidad.getCuenta().getNumeroCuenta());
-		dto.setTipo(entidad.getCuenta().getTipo());
-		dto.setSaldoInicial(entidad.getSaldo() - entidad.getValor());
-		dto.setEstado(entidad.getCuenta().isEstado());
-		dto.setMovimiento(entidad.getValor());
-		dto.setSaldoDisponible(entidad.getSaldo());
-		return dto;
-	}
+	public MovimientoRespuestaDTO convertirEntidadDto(Movimiento entidad);
+	
+	public String obtenerTipoMovimiento(double valor);
 
 }

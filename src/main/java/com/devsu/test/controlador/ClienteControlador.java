@@ -2,12 +2,11 @@ package com.devsu.test.controlador;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -19,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.devsu.test.dto.ClienteDTO;
 import com.devsu.test.dto.ClienteRespuestaDTO;
+import com.devsu.test.interfaces.ClienteServicio;
 import com.devsu.test.modelo.Cliente;
-import com.devsu.test.servicio.ClienteServicio;
 
 /**
  * Controlador que mapea los endpoints de clientes
@@ -31,6 +30,7 @@ import com.devsu.test.servicio.ClienteServicio;
  */
 @RestController
 @RequestMapping("api/clientes")
+@CrossOrigin
 public class ClienteControlador {
 
 	@Autowired
@@ -44,7 +44,7 @@ public class ClienteControlador {
 	@GetMapping
 	public ResponseEntity<Object> obtenerClientes() {
 		List<ClienteRespuestaDTO> lista = clienteServicio.obtenerClientes().stream()
-				.map(clienteServicio::convertirEntidadDto).collect(Collectors.toList());
+				.map(clienteServicio::convertirEntidadDto).toList();
 		return ResponseEntity.ok(lista);
 	}
 

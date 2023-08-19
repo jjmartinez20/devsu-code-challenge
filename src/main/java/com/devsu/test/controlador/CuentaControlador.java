@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -18,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.devsu.test.dto.CuentaDTO;
 import com.devsu.test.dto.CuentaRespuestaDTO;
+import com.devsu.test.interfaces.CuentaServicio;
 import com.devsu.test.modelo.Cuenta;
-import com.devsu.test.servicio.CuentaServicio;
 
 /**
  * Controlador que mapea los endpoints de cuentas
@@ -30,6 +31,7 @@ import com.devsu.test.servicio.CuentaServicio;
  */
 @RestController
 @RequestMapping("api/cuentas")
+@CrossOrigin
 public class CuentaControlador {
 	
 	@Autowired

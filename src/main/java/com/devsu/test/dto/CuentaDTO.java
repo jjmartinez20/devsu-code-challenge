@@ -1,5 +1,7 @@
 package com.devsu.test.dto;
 
+import lombok.Data;
+
 /**
  * Modelo que mapea los campos que se reciben de las peticiones en el
  * controlador de cuentas y su posterior procesamiento.
@@ -8,6 +10,7 @@ package com.devsu.test.dto;
  * @version 1.0.0
  *
  */
+@Data
 public class CuentaDTO {
 
 	private String numeroCuenta;
@@ -19,45 +22,5 @@ public class CuentaDTO {
 	private double saldoInicial;
 
 	private boolean estado;
-
-	public String getNumeroCuenta() {
-		return numeroCuenta;
-	}
-
-	public void setNumeroCuenta(String numeroCuenta) {
-		this.numeroCuenta = numeroCuenta;
-	}
-
-	public long getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(long cliente) {
-		this.cliente = cliente;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	public double getSaldoInicial() {
-		return saldoInicial;
-	}
-
-	public void setSaldoInicial(double saldoInicial) {
-		this.saldoInicial = saldoInicial;
-	}
-
-	public boolean isEstado() {
-		return estado;
-	}
-
-	public void setEstado(boolean estado) {
-		this.estado = estado;
-	}
 
 }

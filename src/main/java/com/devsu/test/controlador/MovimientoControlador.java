@@ -2,11 +2,11 @@ package com.devsu.test.controlador;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.devsu.test.dto.MovimientoDTO;
 import com.devsu.test.dto.MovimientoRespuestaDTO;
+import com.devsu.test.interfaces.MovimientoServicio;
 import com.devsu.test.modelo.Movimiento;
-import com.devsu.test.servicio.MovimientoServicio;
 
 /**
  * Controlador que mapea los endpoints de movimientos
@@ -30,11 +30,12 @@ import com.devsu.test.servicio.MovimientoServicio;
  */
 @RestController
 @RequestMapping("api/movimientos")
+@CrossOrigin
 public class MovimientoControlador {
-	
+
 	@Autowired
 	private MovimientoServicio movimientoServicio;
-	
+
 	/**
 	 * Busca todos los movimientos registrados.
 	 * 
@@ -43,10 +44,10 @@ public class MovimientoControlador {
 	@GetMapping
 	public ResponseEntity<Object> obtenerMovimientos() {
 		List<MovimientoRespuestaDTO> lista = movimientoServicio.obtenerMovimientos().stream()
-				.map(movimientoServicio::convertirEntidadDto).collect(Collectors.toList());
+				.map(movimientoServicio::convertirEntidadDto).toList();
 		return ResponseEntity.ok(lista);
 	}
-	
+
 	/**
 	 * Busca los movimientos de un cliente a partir de su id
 	 * 
@@ -57,10 +58,10 @@ public class MovimientoControlador {
 	@GetMapping(path = "/cliente/{id}")
 	public ResponseEntity<Object> obtenerMovimientosCliente(@PathVariable Long id) {
 		List<MovimientoRespuestaDTO> lista = movimientoServicio.obtenerMovimientosCliente(id).stream()
-				.map(movimientoServicio::convertirEntidadDto).collect(Collectors.toList());
+				.map(movimientoServicio::convertirEntidadDto).toList();
 		return ResponseEntity.ok(lista);
 	}
-	
+
 	/**
 	 * Busca los movimientos de una cuenta a partir del número de cuenta
 	 * 
@@ -71,7 +72,7 @@ public class MovimientoControlador {
 	@GetMapping(path = "/cuenta/{numeroCuenta}")
 	public ResponseEntity<Object> obtenerMovimientosCuenta(@PathVariable String numeroCuenta) {
 		List<MovimientoRespuestaDTO> lista = movimientoServicio.obtenerMovimientosCuenta(numeroCuenta).stream()
-				.map(movimientoServicio::convertirEntidadDto).collect(Collectors.toList());
+				.map(movimientoServicio::convertirEntidadDto).toList();
 		return ResponseEntity.ok(lista);
 	}
 
@@ -101,7 +102,7 @@ public class MovimientoControlador {
 	 * 
 	 */
 	@PostMapping
-	public ResponseEntity<Object> nuevaMovimiento(@Valid @RequestBody MovimientoDTO dto) {
+	public ResponseEntity<Object> nuevoMovimiento(@Valid @RequestBody MovimientoDTO dto) {
 		Movimiento movimiento = movimientoServicio.convertirDtoEntidad(dto);
 		movimiento = movimientoServicio.nuevoMovimiento(movimiento);
 		MovimientoRespuestaDTO respuesta = movimientoServicio.convertirEntidadDto(movimiento);
@@ -138,7 +139,8 @@ public class MovimientoControlador {
 	 * 
 	 */
 	@PatchMapping(path = "/{id}")
-	public ResponseEntity<Object> actualizarMovimiento(@RequestBody Map<String, Object> cambios, @PathVariable Long id) {
+	public ResponseEntity<Object> actualizarMovimiento(@RequestBody Map<String, Object> cambios,
+			@PathVariable Long id) {
 		Movimiento movimiento = movimientoServicio.actualizarMovimiento(id, cambios);
 		if (movimiento != null) {
 			MovimientoRespuestaDTO respuesta = movimientoServicio.convertirEntidadDto(movimiento);
